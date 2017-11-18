@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Jogo da Velha</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="images/icon.svg">
+</head>
+
+<body>
+
+  <div class="ocean">
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+
+
+  <div id="start" class="container">
+
+    <div class="ball"> </div>
+    <div class="ball"> </div>
+    <div class="ball"> </div>
+
+    <section class="start">
+
+      <div class="menu-box">
+        <div class="button-menu-box">
+          <button class="button-menu" type="button" name="jogar"><a class="button-start-link" href="#game">JOGAR</a></button>
+          <button class="button-menu" type="button" name="regras" onclick="openRegras()">REGRAS</button>
+        </div>
+
+        <img class="logo" src="images/logo.svg">
+      </div>
+
+      <div class="regras-box">
+        <p class="regras">Para jogar, escolha entre X e O. Os símbolos devem ser dispostos na grid com a intenção de obter 3 deles em uma linha vertical, horizontal ou diagonal. Então, os jogadores se revezam para colocar os seus símbolos na grid e o primeiro que formar
+          uma linha ganha.</p>
+        <button class="button-menu" type="button" name="voltar" onclick="closeRegras()">VOLTAR</button>
+      </div>
+
+
+    </section>
+  </div>
+
+  <div id="game" class="container">
+
+    <p class="top-text-game">Escolha</p>
+    <img class="player-turn" src="images/circle.svg">
+
+    <section class="game-container">
+
+      <svg class="choice" id="cross" viewBox="0 0 400 528.9">
+          <path d="M26.7 0A26.7 26.7 0 0 0 0 26.7v475.5a26.7 26.7 0 0 0 26.7 26.7H400V0zm281.6 339l-33.7 33.7-74.6-74.5-74.6 74.6L91.7 339l74.6-74.6-74.6-74.6 33.7-33.7 74.6 74.6 74.6-74.6 33.7 33.7-74.6 74.6z"/>
+      </svg>
+
+      <svg class="choice" id="circle" viewBox="0 0 400 528.9">
+        <path  d="M373.3 0H0v528.9h373.3a26.7 26.7 0 0 0 26.7-26.7V26.7A26.7 26.7 0 0 0 373.3 0zM200 376.6a112.2 112.2 0 1 1 112.2-112.2A112.2 112.2 0 0 1 200 376.6z"/>
+        <circle cx="200" cy="264.4" r="76.3"/>
+      </svg>
+
+      <section class="game-box">
+
+        <div class="scoreboard">
+          <img class="score-image" src="images/cross.svg">
+          <h1 id="crossScore" class="score">0</h1>
+        </div>
+
+        <section class="game">
+          <button class="grid" id="grid1" type="button" onclick="place(this)"></button>
+          <button class="grid" id="grid2" type="button" onclick="place(this)"></button>
+          <button class="grid" id="grid3" type="button" onclick="place(this)"></button>
+          <button class="grid" id="grid4" type="button" onclick="place(this)"></button>
+          <button class="grid" id="grid5" type="button" onclick="place(this)"></button>
+          <button class="grid" id="grid6" type="button" onclick="place(this)"></button>
+          <button class="grid" id="grid7" type="button" onclick="place(this)"></button>
+          <button class="grid" id="grid8" type="button" onclick="place(this)"></button>
+          <button class="grid" id="grid9" type="button" onclick="place(this)"></button>
+        </section>
+
+
+        <div class="scoreboard">
+          <img class="score-image" src="images/circle.svg">
+          <h1 id="circleScore" class="score">0</h1>
+        </div>
+
+      </section>
+
+      <div class="result-box">
+        <div class="result-image">
+        </div>
+        <h1 class="result-message">Você ganhou!</h1>
+      </div>
+
+    </section>
+
+
+
+    <section class="button-game-box">
+      <button class="button-game off" type="button" name="jogar" onclick="startGame()">JOGAR</button>
+      <button id="retry" class="button-game" type="button" name="retry" onclick="retryGame()">RETRY</button>
+      <button class="button-game" type="button" name="voltar" onclick="exitGame()"><a class="button-game-link" href="#start">VOLTAR</a></button>
+
+    </section>
+
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/animation.js" type="text/javascript"></script>
+  <script src="js/gameLogic.js" type="text/javascript"></script>
+  <script src="js/smothScrolling.js" type="text/javascript"></script>
+</body>
+
+</html>
