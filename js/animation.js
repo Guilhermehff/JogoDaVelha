@@ -1,3 +1,6 @@
+
+
+// Animação para quando o jogador clica em jogar após escolher sua peça
 function startGame() {
   $(".choice").css('pointer-events', 'none');
   $(".choice").css('opacity', '0');
@@ -7,8 +10,8 @@ function startGame() {
   setTimeout(function() {
     $(".choice").css('display', 'none');
     $(".game-box").css('display', 'flex');
-    $(".button-game:nth-of-type(1)").css('display', 'none');
-    $(".button-game:nth-of-type(3) > a").html('SAIR');
+    $(".button-game:nth-child(1)").css('display', 'none');
+    $(".button-game:nth-child(3)").html('SAIR');
     $(".top-text-game").html('Turno');
   }, 1000);
   setTimeout(function() {
@@ -20,6 +23,7 @@ function startGame() {
   }, 1100);
 }
 
+// Animação para quando o jogador abre as regras do jogo
 function openRegras() {
   $(".menu-box").css('pointer-events', 'none');
   $(".menu-box").css('opacity', '0');
@@ -32,6 +36,7 @@ function openRegras() {
   }, 1100);
 }
 
+// Animação para quando o jogador fecha as regras do jogo
 function closeRegras() {
   $(".regras-box").css('pointer-events', 'none');
   $(".regras-box").css('opacity', '0');
@@ -45,15 +50,15 @@ function closeRegras() {
   }, 1100);
 }
 
-
+// Animação para quando o jogador decide sair do jogo e voltar para o menu
 function exitGame() {
   $("#circleScore").html('0');
   $("#crossScore").html('0');
   playerWin = 0;
   computerWin = 0;
   $(".choice").removeClass('chosen');
-  $(".button-game:nth-of-type(1)").removeClass('on');
-  $(".button-game:nth-of-type(1)").addClass('off');
+  $(".button-game:nth-child(1)").removeClass('on');
+  $(".button-game:nth-child(1)").addClass('off');
   $(".game-box").css('pointer-events', 'none');
   $(".game-box").css('opacity', '0');
   $(".button-game").css('pointer-events', 'none');
@@ -73,13 +78,14 @@ function exitGame() {
     $(".choice").css('pointer-events', 'auto');
     $(".top-text-game").html('Escolha');
     $(".top-text-game").css('opacity', '1');
-    $(".button-game:nth-of-type(1)").css('display', 'flex');
-    $(".button-game:nth-of-type(3) > a").html('VOLTAR');
+    $(".button-game:nth-child(1)").css('display', 'flex');
+    $(".button-game:nth-child(3)").html('VOLTAR');
     $(".button-game").css('pointer-events', 'auto');
     $(".button-game").css('opacity', '1');
   }, 1000);
 }
 
+// Animação para quando o jogador decide resetar o jogo
 function retryGame() {
   $(".button-game").css('pointer-events', 'none');
   $(".button-game").css('opacity', '0');

@@ -127,23 +127,21 @@ body {
   background-color: transparent;
   cursor: pointer;
   color: white;
+  box-sizing: border-box;
   border: 2px solid white;
 }
 
-.button-menu:hover>a {
+.button-menu:hover {
   color: white;
+  box-sizing: border-box;
 }
 
-.button-menu:nth-of-type(2) {
+.button-menu:nth-child(2) {
   margin-top: 30px;
   margin-left: 100px;
 }
 
 .button-start-link {
-  width: inherit;
-  height: inherit;
-  width: inherit;
-  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -225,6 +223,7 @@ body {
 .choice:hover {
   fill: #ffcb0d;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .chosen {
@@ -434,6 +433,7 @@ body {
 .button-game:hover {
   background-color: transparent;
   transition: ease 0.5s;
+  box-sizing: border-box;
   cursor: pointer;
   color: white;
   border: 2px solid white;
@@ -459,13 +459,12 @@ body {
 }
 
 .button-game:hover>a {
+  box-sizing: border-box;
   color: white;
   transition: ease 0.5s;
 }
 
 .button-game-link {
-  width: inherit;
-  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;

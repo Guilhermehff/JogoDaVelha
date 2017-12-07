@@ -1,15 +1,35 @@
+// Variável que armazena a peça do jogador
 var playerPiece;
+
+// Variável que armazena a peça do computador
 var computerPiece;
+
+// Variável que armazena as vitórias do jogador
 var playerWin = 0;
+
+// Variável que armazena as vitórias do computador
 var computerWin = 0;
 
+
+
+
+
+
+
+// Checa se o jogador escolheu uma peça
 $(".choice").on('click', function() {
   if ($(".choice").hasClass('chosen')) {
     $(".choice").removeClass('chosen')
   }
+
+  // Destaca a peça escolhida
   $(this).addClass('chosen');
+
+  // Permite que o jogador clique para jogar
   $(".button-game:nth-of-type(1)").removeClass('off');
   $(".button-game:nth-of-type(1)").addClass('on');
+
+  // Coloca a peça do computador como a que o jogador não escolheu
   if ($(this).is("#cross")) {
     playerPiece = "cross";
     computerPiece = "circle";
@@ -17,34 +37,67 @@ $(".choice").on('click', function() {
     playerPiece = "circle";
     computerPiece = "cross";
   }
+
+  // Atualiza a imagem dos turnos com a do jogador
   $('.player-turn').attr('src', 'images/' + playerPiece + '.svg');
 });
 
 
+
+
+
+
+// Função para quando o jogador clica na grid do jogo
 function place(button) {
+
+  // Adiciona a peça do jogador na grid e torna impossivel de ser clicada novamente
   $(button).addClass(playerPiece);
   $(button).css('pointer-events', 'none');
+
+  // Roda função para ver se o jogador venceu, se sim, desativa a grid
   if (check(winner)) {
     $('.grid').css('pointer-events', 'none');
-  } else if (tie()) {
+  }
+
+  // Roda função para ver se o jogo empatou, se sim, desativa a grid
+  else if (tie()) {
     $('.grid').css('pointer-events', 'none');
-  } else {
+  }
+
+  // Desativa a grid para o jogador não clicar e passa a vez para o computador
+  else {
     $('.grid').css('pointer-events', 'none');
     $('.player-turn').attr('src', 'images/' + computerPiece + '.svg');
     computerPlay();
   }
 }
 
+
+
+
+
+
+// Realiza os movimentos do computador
 function computerPlay() {
   setTimeout(function() {
+
+    // Checa se o computador pode fazer um movimento que leve a vitória e joga nessa posição
     if (check(winningMove)) {
       $(computerSpace).addClass('computerPiece');
       $(computerSpace).css('pointer-events', 'none');
-    } else if (check(usedSpaces) === false) {
+    }
+
+    // Checa se o jogador pode fazer um movimento de vitória e joga nessa posição se retornar true
+    else if (check(usedSpaces) === false) {
+
+      // Checa se existe uma possibilidade de 3 espaços para vencer e joga nessa posição
       if (check(openSpaces)) {
         $(computerSpace).addClass(computerPiece);
         $(computerSpace).css('pointer-events', 'none');
-      } else {
+      }
+
+      // Se não houver possibilidades de vencer ou bloquear o jogador, joga aleatoriamente
+      else {
         var computerPlace = Math.floor(Math.random() * 9) + 1;
         if ($('#grid' + computerPlace).is('.circle, .cross')) {
           computerPlay();
@@ -54,18 +107,33 @@ function computerPlay() {
         }
       }
     };
+
+    // Peça adicionada se a checagem para vitória do jogador retornar true
     $(computerSpace).addClass(computerPiece);
     $(computerSpace).css('pointer-events', 'none');
+
+    // Checa se alguém venceu e desliga a grid
     if (check(winner)) {
       $('.grid').css('pointer-events', 'none');
       return;
     }
+
+    // Passa a vez para o jogador
     $('.player-turn').attr('src', 'images/' + playerPiece + '.svg');
     check(openGrid);
+
+    // Timing adicionado para simular pensamento da máquina
   }, 800);
 
 }
 
+
+
+
+
+
+
+// Função criada para checar todas as sequências de 3 da grid
 function check(x) {
   if (
     x('#grid1', '#grid2', '#grid3') ||
@@ -83,6 +151,10 @@ function check(x) {
   }
 }
 
+
+
+
+// Função criada para apenas abrir espaços que não tenham peças para o jogador
 function openGrid(p1, p2, p3) {
   if (!$(p1).hasClass(computerPiece) && !$(p1).hasClass(playerPiece)) {
     $(p1).css('pointer-events', 'auto');
@@ -95,6 +167,12 @@ function openGrid(p1, p2, p3) {
   }
 }
 
+
+
+
+
+
+// Checa se a máquina pode fazer um movimento de vitória ao ver se existe uma sequência de 2 sem uma peça do jogador ou computador no terceiro espaço e armazena esta posição
 function winningMove(p1, p2, p3) {
   if ($(p1).hasClass(computerPiece) && $(p2).hasClass(computerPiece) && !$(p3).hasClass(computerPiece) || !$(p1).hasClass(computerPiece) && $(p2).hasClass(computerPiece) && $(p3).hasClass(computerPiece) || $(p1).hasClass(computerPiece) && !$(p2).hasClass(computerPiece) && $(p3).hasClass(computerPiece)) {
     if (!$(p1).hasClass(computerPiece) && !$(p1).hasClass(playerPiece)) {
@@ -112,6 +190,12 @@ function winningMove(p1, p2, p3) {
   }
 }
 
+
+
+
+
+
+// Verifica se o jogador consegue vencer ao checar se existe uma sequência de 2 sem uma peça do computador bloqueando e armazena esta posição
 function usedSpaces(p1, p2, p3) {
   if ($(p1).hasClass(playerPiece) && $(p2).hasClass(playerPiece) && !$(p3).hasClass(computerPiece) || !$(p1).hasClass(computerPiece) && $(p2).hasClass(playerPiece) && $(p3).hasClass(playerPiece) || $(p1).hasClass(playerPiece) && !$(p2).hasClass(computerPiece) && $(p3).hasClass(playerPiece)) {
     if (!$(p1).hasClass(playerPiece)) {
@@ -129,6 +213,13 @@ function usedSpaces(p1, p2, p3) {
   }
 }
 
+
+
+
+
+
+
+// Checa se existem 3 espaços vazios que possibilitem que o computador vença e armazena esta posição
 function openSpaces(p1, p2, p3) {
   if (!$(p1).hasClass(playerPiece) && !$(p2).hasClass(playerPiece) && !$(p3).hasClass(playerPiece)) {
     if (!$(p1).hasClass(computerPiece)) {
@@ -144,6 +235,14 @@ function openSpaces(p1, p2, p3) {
   }
 }
 
+
+
+
+
+
+
+
+// Verifica se alguém venceu ao passar pelas sequências e ver se as peças pertencem ao mesmo set, depois realiza uma animação que leva para a tela seguinte
 function winner(p1, p2, p3) {
   if ($(p1).hasClass(playerPiece) && $(p2).hasClass(playerPiece) && $(p3).hasClass(playerPiece)) {
     playerWin = playerWin + 1;
@@ -232,6 +331,17 @@ function winner(p1, p2, p3) {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+// Verifica se o jogo empatou ao passar pelas sequências e ver se as peças são diferentes, depois realiza uma animação que leva para a tela seguinte
 function tie() {
   var tieCount;
   for (var i = 1; i < 10; i++) {
@@ -264,6 +374,14 @@ function tie() {
   return true;
 }
 
+
+
+
+
+
+
+
+// Reseta as peças do grid e torna todos os espaços clicaveis novamente
 function reset(p1, p2, p3) {
   $(p1).removeClass('circle cross');
   $(p2).removeClass('circle cross');

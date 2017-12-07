@@ -1,24 +1,24 @@
-$(document).ready(function(){
-  // Add smooth scrolling to all links
+$(document).ready(function() {
+
+  // Adiciona smooth scrolling para todos links
   $("a").on('click', function(event) {
 
-    // Make sure this.hash has a value before overriding default behavior
+    // Garante que a # atual tem um valor antes de resetar
     if (this.hash !== "") {
-      // Prevent default anchor click behavior
+      // Previne o comportamento padrão do click
       event.preventDefault();
 
-      // Store hash
+      // Guarda a #
       var hash = this.hash;
 
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      // Utiliza a propriedade animate() do Jquery para fazer uma rolagem progressiva
       $('html, body').animate({
         scrollTop: $(hash).offset().top
-      }, 800, function(){
+      }, 800, function() {
 
-        // Add hash (#) to URL when done scrolling (default click behavior)
+        // adiciona # na url para indicar a seção que o usuário está
         window.location.hash = hash;
       });
-    } // End if
+    }
   });
 });
